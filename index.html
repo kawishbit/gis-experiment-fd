@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transmetro Map Pekanbaru</title>
+
+    <link rel="stylesheet" href="leaflet.css" />
+    <link rel="stylesheet" href="leaflet-routing-machine.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="modal" class="modal">
+      <div class="modal__overlay jsOverlay"></div>
+      <div class="modal__container">
+        <p id="modal-text"></p>
+        <button class="modal__close jsModalClose" onclick="closeModal()">
+          &#10005;
+        </button>
+      </div>
+    </div>
+    <div class="main-layer">
+      <div id="k1" onclick="toggleLayers('k1')" class="layer-item active k1">
+        <p>K1</p>
+      </div>
+      <div id="k2" onclick="toggleLayers('k2')" class="layer-item active k2">
+        <p>K2</p>
+      </div>
+      <div id="k3" onclick="toggleLayers('k3')" class="layer-item active k3">
+        <p>K3</p>
+      </div>
+      <div id="k4" onclick="toggleLayers('k4')" class="layer-item active k4">
+        <p>K4</p>
+      </div>
+      <div id="k5" onclick="toggleLayers('k5')" class="layer-item active k5">
+        <p>K5</p>
+      </div>
+    </div>
+    <script src="leaflet.js"></script>
+    <script src="leaflet-routing-machine.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
