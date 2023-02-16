@@ -1,4 +1,26 @@
-const map = L.map("map").setView([0.51044, 101.438309], 14);
+const map = L.map("map");
+
+const markersLayer = new L.LayerGroup();
+//... adding data in searchLayer ...
+map.addLayer(markersLayer);
+
+var controlSearch = new L.Control.Search({
+  layer: markersLayer,
+  initial: false,
+  zoom: 17,
+  marker: false,
+});
+
+map.addControl(controlSearch);
+
+setTimeout(() => {
+  map.setView([0.5020172734574941, 101.43985748291017], 14);
+  let body = document.body;
+  body.classList.remove("loading");
+
+  let loader = document.getElementById("loader-wrapper");
+  loader.classList.add("hide");
+}, 5000);
 
 const tiles = L.tileLayer(
   "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.{ext}",
@@ -115,6 +137,7 @@ function closeModal() {
         " "
       ));
 }
+
 function fetchData(query) {
   let qs = encodeURIComponent(query);
   fetch(
@@ -141,40 +164,40 @@ function populateMarkers() {
       title: b.display_name,
       icon: icon,
     });
-    marker.addTo(map).on("click", () => {
+    markersLayer.addLayer(marker).on("click", () => {
       openModal(b.display_name);
     });
   });
 }
 function populateCustomMarkers() {
   let customMarkers = [
-    [0.5862143750062951, 101.4029962317332, "Test Detail"],
-    [0.5764161148593365, 101.41810266108168, "Test Detail"],
-    [0.5776408983055044, 101.42586001669302, "Test Detail"],
-    [0.5833565508883577, 101.43239252668155, "Test Detail"],
-    [0.5289375447825304, 101.42084032115574, "Test Detail"],
-    [0.5409533171791432, 101.43319994067764, "Test Detail"],
-    [0.5320273170704299, 101.44178300979007, "Test Detail"],
-    [0.5267625450727371, 101.44241783105825, "Test Detail"],
-    [0.522999832404562, 101.44788006279376, "Test Detail"],
-    [0.5333169423499314, 101.44757660547513, "Test Detail"],
-    [0.5387771799740945, 101.43240649363018, "Test Detail"],
-    [0.5273676792181908, 101.41978266917478, "Test Detail"],
-    [0.5121207637826554, 101.45014774699712, "Test Detail"],
-    [0.5081727086896213, 101.45770084781607, "Test Detail"],
-    [0.5001049364511968, 101.45649921814032, "Test Detail"],
-    [0.5121207637826554, 101.49477970638178, "Test Detail"],
-    [0.5088593271405176, 101.50010120923149, "Test Detail"],
-    [0.5091035668242411, 101.45017775264161, "Test Detail"],
-    [0.506721858850351, 101.4511004325712, "Test Detail"],
-    [0.5147321116941492, 101.49525265458067, "Test Detail"],
-    [0.5095357396723792, 101.50131533110142, "Test Detail"],
-    [0.46550039280369543, 101.37451618047248, "Test Detail"],
-    [0.4648328087381435, 101.37312027680674, "Test Detail"],
-    [0.46513625604848086, 101.38003910367173, "Test Detail"],
-    [0.46513625604848086, 101.38003910367173, "Test Detail"],
-    [0.45455806939124804, 101.41811086339678, "Test Detail"],
-    [0.4396284246570155, 101.4238158609872, "Test Detail"],
+    [0.5862143750062951, 101.4029962317332, "Halte Ayam"],
+    [0.5764161148593365, 101.41810266108168, "Halte Angsa"],
+    [0.5776408983055044, 101.42586001669302, "Halte Bebek"],
+    [0.5833565508883577, 101.43239252668155, "Halte Burung"],
+    [0.5289375447825304, 101.42084032115574, "Halte Domba"],
+    [0.5409533171791432, 101.43319994067764, "Halte Elang"],
+    [0.5320273170704299, 101.44178300979007, "Halte Gajah"],
+    [0.5267625450727371, 101.44241783105825, "Halte Harimau"],
+    [0.522999832404562, 101.44788006279376, "Halte Ikan"],
+    [0.5333169423499314, 101.44757660547513, "Halte Jerapah"],
+    [0.5387771799740945, 101.43240649363018, "Halte Kalkun"],
+    [0.5273676792181908, 101.41978266917478, "Halte Kelinci"],
+    [0.5121207637826554, 101.45014774699712, "Halte Kucing"],
+    [0.5081727086896213, 101.45770084781607, "Halte Kuda"],
+    [0.5001049364511968, 101.45649921814032, "Halte Lebah"],
+    [0.5121207637826554, 101.49477970638178, "Halte Merak"],
+    [0.5088593271405176, 101.50010120923149, "Halte Merpati"],
+    [0.5091035668242411, 101.45017775264161, "Halte Paus"],
+    [0.506721858850351, 101.4511004325712, "Halte Penyu"],
+    [0.5147321116941492, 101.49525265458067, "Halte Rusa"],
+    [0.5095357396723792, 101.50131533110142, "Halte Sapi"],
+    [0.46550039280369543, 101.37451618047248, "Halte Singa"],
+    [0.4648328087381435, 101.37312027680674, "Halte Serigala"],
+    [0.46513625604848086, 101.38003910367173, "Halte Tupai"],
+    [0.46513625604848086, 101.38003910367173, "Halte Udang"],
+    [0.45455806939124804, 101.41811086339678, "Halte Unta"],
+    [0.4396284246570155, 101.4238158609872, "Halte Zebra"],
   ];
   customMarkers.forEach((b) => {
     let lat = b[0];
@@ -183,7 +206,7 @@ function populateCustomMarkers() {
       title: b[2],
       icon: icon,
     });
-    marker.addTo(map).on("click", () => {
+    markersLayer.addLayer(marker).on("click", () => {
       openModal(b[2]);
     });
   });

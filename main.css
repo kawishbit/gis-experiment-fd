@@ -144,3 +144,52 @@ body {
 .leaflet-control-container .leaflet-routing-container-hide {
   display: none;
 }
+
+body.loading {
+  overflow: hidden;
+}
+.loader-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-wrapper.hide {
+  display: none;
+}
+.loader-wrapper.hide .loader {
+  display: none;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #3498db;
+  width: 75px;
+  height: 75px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
